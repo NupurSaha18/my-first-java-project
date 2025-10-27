@@ -15,9 +15,32 @@ public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         double a = input.nextDouble();
         double b = input.nextDouble();
-        double addResult = ob.add(a,b);
-        System.out.println(addResult);
 
+        System.out.println("Enter Operator(+,-,*,/): ");
+        String operator = input.next();
+
+        switch (operator){
+            case "+":
+                double addResult = ob.add(a,b);
+                System.out.println(addResult);
+                break;
+            case "-":
+                double subResult = ob.subtract(a,b);
+                System.out.println(subResult);
+                break;
+            case "*":
+                double multResult = ob.multiply(a,b);
+                System.out.println(multResult);
+                break;
+            case "/":
+                double divisionResult = ob.division(a,b);
+                System.out.println(divisionResult);
+                break;
+            default:
+                System.out.println("Invalid operation");
+        }
+
+        input.close();
     } catch (ArithmeticException e) {
         System.out.println("Math error occurred: " + e.getMessage());
     }

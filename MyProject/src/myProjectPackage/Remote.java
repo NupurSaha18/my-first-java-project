@@ -3,8 +3,8 @@ package myProjectPackage;
 import java.rmi.*;
 import java.rmi.server.*;
 
-public  class CalcRemote extends UnicastRemoteObject implements Calculator {
-    protected CalcRemote() throws RemoteException {
+public  class Remote extends UnicastRemoteObject implements Calculator {
+    protected Remote() throws RemoteException {
         super();
     }
 
