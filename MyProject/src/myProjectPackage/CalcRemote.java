@@ -9,13 +9,22 @@ public  class CalcRemote extends UnicastRemoteObject implements Calculator {
     }
 
     @Override
-    public int multiply(int a, int b) {
+    public double multiply(double a, double b) {
         return (a * b);
     }
 
     @Override
-    public int division(int a, int b) {
-
+    public double division(double a, double b){
         return (a / b);
+    }
+
+    @Override
+    public double add(double a, double b){
+    return a+b ;
+    }
+
+    @Override
+    public double subtract(double a, double b) throws RemoteException {
+        return a-b;
     }
 }
