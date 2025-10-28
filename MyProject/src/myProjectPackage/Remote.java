@@ -29,7 +29,7 @@ public class Remote extends UnicastRemoteObject implements Calculator {
 
     // for subtraction
     @Override
-    public double subtract(double a, double b) throws RemoteException {
+    public double subtract(double a, double b)  {
         return a - b;
     }
 }

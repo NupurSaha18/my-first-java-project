@@ -5,54 +5,67 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
-// client class main method implementation
 public class Client {
     public static void main(String[] args) {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 5000);
             Calculator ob = (Calculator) registry.lookup("rmi://localhost/CalculatorService");
 
-//  scanner class initialization
             Scanner input = new Scanner(System.in);
 
-// for taking user input
-            System.out.println("Enter a: ");
-            double a = input.nextDouble();
-            System.out.println("Enter b: ");
-            double b = input.nextDouble();
+            boolean overallContinue = true;
+            while (overallContinue) {
 
-// for choosing operation
-            System.out.println("1.Add 2.Subtract 3.Multiply 4.Divide ");
-            System.out.println("Enter choice:");
-            int choice = input.nextInt();
+                System.out.println("Enter a: ");
+                double a = input.nextDouble();
+                System.out.println("Enter b: ");
+                double b = input.nextDouble();
 
-// switch to choosing operation
-            switch (choice) {
-                case 1:
-                    double addResult = ob.add(a, b);
-                    System.out.println(addResult);
-                    break;
-                case 2:
-                    double subResult = ob.subtract(a, b);
-                    System.out.println(subResult);
-                    break;
-                case 3:
-                    double multResult = ob.multiply(a, b);
-                    System.out.println(multResult);
-                    break;
-                case 4:
-                    double divisionResult = ob.division(a, b);
-                    System.out.println(divisionResult);
-                    break;
-                default:
-                    System.out.println("Invalid operation");
+                boolean pairContinue = true;
+                while (pairContinue) {
+                    System.out.println("1.Add  2.Subtract  3.Multiply  4.Divide  5.Change a & b  6.Exit");
+                    System.out.println("Enter choice:");
+                    int choice = input.nextInt();
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Result: " + ob.add(a, b));
+                            break;
+                        case 2:
+                            System.out.println("Result: " + ob.subtract(a, b));
+                            break;
+                        case 3:
+                            System.out.println("Result: " + ob.multiply(a, b));
+                            break;
+                        case 4:
+                            if (b == 0) {
+                                System.out.println("Cannot divide by zero!");
+                            } else {
+                                System.out.println("Result: " + ob.division(a, b));
+                            }
+                            break;
+                        case 5:
+                            pairContinue = false;
+                            break;
+                        case 6:
+                            pairContinue = false;
+                            overallContinue = false;
+                            break;
+                        default:
+                            System.out.println("Invalid operation");
+                            break;
+                    }
+
+                    System.out.println(); // blank line for readability
+                }
             }
+
             input.close();
 
         } catch (ArithmeticException e) {
             System.out.println("Math error occurred: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Failed to connect to server" + e);
+            System.out.println("Failed to connect to server: " + e);
         }
     }
 }
